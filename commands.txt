@@ -22,7 +22,7 @@ cp /var/db/xbps/keys/* /mnt/var/db/xbps/keys/
 REPO=https://repo-default.voidlinux.org/current
 ARCH=x86_64
 XBPS_ARCH=$ARCH xbps-install -S -R "$REPO" -r /mnt
-XBPS_ARCH=$ARCH xbps-install -r /mnt $(grep -v '^\s*#' packages.list | grep -v '^\s*$')
+XBPS_ARCH=$ARCH xbps-install -R "$REPO" -r /mnt $(grep -v '^\s*#' packages.list | grep -v '^\s*$')
 
 xgenfstab -U /mnt > /mnt/etc/fstab
 
