@@ -6,11 +6,11 @@ MOUNT=/mnt/avoid-build
 REPO=https://repo-default.voidlinux.org/current
 ARCH=x86_64
 
-truncate -s 500M "$IMAGE"
+truncate -s 1500M "$IMAGE"
 
 sfdisk "$IMAGE" << 'EOF'
 label: gpt
-size=100M, type=uefi
+size=512M, type=uefi
 type=linux
 EOF
 
@@ -55,3 +55,5 @@ umount -R "$MOUNT"
 e2fsck -f "${LOOP}p2"
 
 losetup -d "$LOOP"
+
+xz -T0 -v "$IMAGE"
