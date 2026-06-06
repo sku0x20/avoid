@@ -50,6 +50,7 @@ traceroute
 ethtool
 curl
 xtools
+strip
 
 # data
 iana-etc
