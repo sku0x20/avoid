@@ -41,6 +41,7 @@ less
 which
 gzip
 xz
+unzip
 file
 diffutils
 findutils
