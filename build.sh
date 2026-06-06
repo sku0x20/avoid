@@ -30,8 +30,8 @@ cp noextract.conf "$MOUNT/etc/xbps.d/noextract.conf"
 mkdir -p "$MOUNT/var/db/xbps/keys"
 cp /var/db/xbps/keys/* "$MOUNT/var/db/xbps/keys/"
 
-XBPS_ARCH=$ARCH xbps-install -S -R "$REPO" -r "$MOUNT"
-XBPS_ARCH=$ARCH xbps-install -R "$REPO" -r "$MOUNT" $(grep -v '^\s*#' packages.list | grep -v '^\s*$')
+XBPS_ARCH=$ARCH xbps-install -y -S -R "$REPO" -r "$MOUNT"
+XBPS_ARCH=$ARCH xbps-install -y -R "$REPO" -r "$MOUNT" $(grep -v '^\s*#' packages.list | grep -v '^\s*$')
 
 xgenfstab -U "$MOUNT" > "$MOUNT/etc/fstab"
 
