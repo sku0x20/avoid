@@ -8,7 +8,7 @@ xbps-query -Rx base-system
 
 
 ## installation commands
-cfdisk
+cfdisk /dev/sda
 
 mkfs.vfat /dev/sda1
 mkfs.ext4 /dev/sda2
