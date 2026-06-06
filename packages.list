@@ -23,6 +23,7 @@ e2fsprogs
 
 # boot
 dracut
+grub-x86_64-efi
 
 # networking
 iproute2
