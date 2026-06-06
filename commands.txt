@@ -1,0 +1,6 @@
+# Install only the absolute bare essentials to your target mount point (/mnt)
+XBPS_ARCH=$ARCH xbps-install -R "$REPO" -S -r /mnt base-files coreutils runit xbps kmod linux
+
+xbps-query -f linux6.6
+xbps-query -Rf linux6.6
+xbps-query -x base-system
