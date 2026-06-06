@@ -4,3 +4,12 @@ XBPS_ARCH=$ARCH xbps-install -R "$REPO" -S -r /mnt base-files coreutils runit xb
 xbps-query -f linux6.6
 xbps-query -Rf linux6.6
 xbps-query -x base-system
+
+# Print package details; detect meta-package (no files) and show deps if so
+pkg=base-system
+xbps-query -RS "$pkg"
+files=$(xbps-query -Rf "$pkg")
+if [ -z "$files" ]; then
+    echo "--- meta-package: dependencies ---"
+    xbps-query -Rx "$pkg"
+fi
