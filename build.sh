@@ -10,7 +10,7 @@ truncate -s 500M "$IMAGE"
 
 sfdisk "$IMAGE" << 'EOF'
 label: gpt
-size=512M, type=uefi
+size=100M, type=uefi
 type=linux
 EOF
 
