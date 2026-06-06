@@ -2,7 +2,6 @@
 base-files
 linux6.18
 glibc
-glibc-locales
 eudev
 kmod
 runit-void
@@ -50,7 +49,6 @@ traceroute
 ethtool
 curl
 xtools
-strip
 
 # data
 iana-etc

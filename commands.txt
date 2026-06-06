@@ -27,7 +27,6 @@ XBPS_ARCH=$ARCH xbps-install -R "$REPO" -r /mnt $(grep -v '^\s*#' packages.list 
 xgenfstab -U /mnt > /mnt/etc/fstab
 
 xchroot /mnt /bin/bash
-xbps-reconfigure -f glibc-locales
 passwd
 
 # mount -t efivarfs none /sys/firmware/efi/efivars
