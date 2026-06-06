@@ -17,6 +17,11 @@ mkdir -p /mnt/boot/efi/
 mount /dev/sda1 /mnt/boot/efi/
 
 # Install packages from packages.list into /mnt
+mkdir -p /mnt/etc/xbps.d
+echo "noextract=/usr/share/man/*" >> /mnt/etc/xbps.d/noextract.conf
+echo "noextract=/usr/share/locale/*" >> /mnt/etc/xbps.d/noextract.conf
+echo "noextract=/usr/share/info/*" >> /mnt/etc/xbps.d/noextract.conf
+
 mkdir -p /mnt/var/db/xbps/keys
 cp /var/db/xbps/keys/* /mnt/var/db/xbps/keys/
 REPO=https://repo-default.voidlinux.org/current
