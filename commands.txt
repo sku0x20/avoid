@@ -5,3 +5,9 @@ xbps-query -Rf linux6.6
 xbps-query -Rx base-system
 
 # custom kernel without sound modules.
+
+# Install packages from packages.list into /mnt
+mkdir -p /mnt/var/db/xbps/keys
+cp /var/db/xbps/keys/* /mnt/var/db/xbps/keys/
+XBPS_ARCH=$ARCH xbps-install -S -R "$REPO" -r /mnt
+grep -v '^\s*#' packages.list | grep -v '^\s*$' | xargs XBPS_ARCH=$ARCH xbps-install -r /mnt
