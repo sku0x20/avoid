@@ -49,6 +49,7 @@ sudo
 traceroute
 ethtool
 curl
+xtools
 
 # data
 iana-etc
