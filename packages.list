@@ -30,6 +30,7 @@ iproute2
 dhcpcd
 openssh
 iputils
+curl
 
 # hardware
 pciutils
