@@ -10,6 +10,7 @@ runit-void
 # core tools
 bash
 xbps
+void-keyring
 coreutils
 util-linux
 shadow
