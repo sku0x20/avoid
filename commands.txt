@@ -3,3 +3,5 @@ XBPS_ARCH=$ARCH xbps-install -R "$REPO" -S -r /mnt base-files coreutils runit xb
 
 xbps-query -Rf linux6.6
 xbps-query -Rx base-system
+
+# custom kernel without sound modules.
