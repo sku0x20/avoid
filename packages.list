@@ -39,7 +39,6 @@ sed
 grep
 less
 which
-file
 gzip
 diffutils
 findutils
