@@ -29,6 +29,8 @@ XBPS_ARCH=$ARCH xbps-install -R "$REPO" -r /mnt $(grep -v '^\s*#' packages.list 
 
 echo "LANG=en_US.UTF-8" > /mnt/etc/locale.conf
 
+rm -rf /mnt/var/cache/xbps/*
+
 xgenfstab -U /mnt > /mnt/etc/fstab
 
 xchroot /mnt /bin/bash
