@@ -30,7 +30,6 @@ iproute2
 dhcpcd
 openssh
 iputils
-curl
 
 # hardware
 pciutils
@@ -49,6 +48,7 @@ nano
 sudo
 traceroute
 ethtool
+curl
 
 # data
 iana-etc
