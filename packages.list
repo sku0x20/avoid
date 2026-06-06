@@ -1,43 +1,54 @@
+# base
 base-files
 linux6.18
 glibc
 glibc-locales
 eudev
+kmod
+runit-void
+
+# core tools
+bash
+xbps
+coreutils
+util-linux
 shadow
 procps-ng
 ncurses
-util-linux
-coreutils
 tar
+
+# storage
 dosfstools
 e2fsprogs
-pciutils
-iproute2
 
-bash
-xbps
-kmod
-runit-void
-dhcpcd
-openssh
+# boot
 dracut
 
+# networking
+iproute2
+dhcpcd
+openssh
 iputils
-traceroute
-ethtool
 
+# hardware
+pciutils
+
+# cli utilities
 gawk
 sed
+grep
 less
 which
 file
 gzip
-grep
 diffutils
 findutils
 nano
 sudo
+traceroute
+ethtool
 
+# data
 iana-etc
 tzdata
 void-artwork
