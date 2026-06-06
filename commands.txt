@@ -16,8 +16,6 @@ mount /dev/sda2 /mnt/
 mkdir -p /mnt/boot/efi/
 mount /dev/sda1 /mnt/boot/efi/
 
-xgenfstab -U /mnt > /mnt/etc/fstab
-
 # Install packages from packages.list into /mnt
 mkdir -p /mnt/var/db/xbps/keys
 cp /var/db/xbps/keys/* /mnt/var/db/xbps/keys/
@@ -25,6 +23,8 @@ REPO=https://repo-default.voidlinux.org/current
 ARCH=x86_64
 XBPS_ARCH=$ARCH xbps-install -S -R "$REPO" -r /mnt
 grep -v '^\s*#' packages.list | grep -v '^\s*$' | xargs XBPS_ARCH=$ARCH xbps-install -r /mnt
+
+xgenfstab -U /mnt > /mnt/etc/fstab
 
 xchroot /mnt /bin/bash
 xbps-reconfigure -f glibc-locales
