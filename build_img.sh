@@ -40,6 +40,8 @@ cp /var/db/xbps/keys/* "$MOUNT/var/db/xbps/keys/"
 XBPS_ARCH=$ARCH xbps-install -y -S -R "$REPO" -r "$MOUNT"
 XBPS_ARCH=$ARCH xbps-install -y -R "$REPO" -r "$MOUNT" $(grep -v '^\s*#' packages.list | grep -v '^\s*$')
 
+echo "=== blkid output ===" && blkid "${LOOP}p1" "${LOOP}p2"
+
 cp zshrc "$MOUNT/root/.zshrc"
 mkdir -p "$MOUNT/etc/skel/.ssh"
 cp zshrc "$MOUNT/etc/skel/.zshrc"
