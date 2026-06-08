@@ -12,7 +12,7 @@ jobs:
   build-and-release:
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/void-linux/void-glibc-full:latest
+      image: ghcr.io/void-linux/void-glibc:latest
       options: --privileged
 
     steps:
