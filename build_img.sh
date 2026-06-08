@@ -6,7 +6,7 @@ MOUNT=/mnt/avoid-build
 REPO=https://repo-default.voidlinux.org/current
 ARCH=x86_64
 
-truncate -s 4G "$IMAGE"
+truncate -s 8G "$IMAGE"
 
 sfdisk "$IMAGE" << 'EOF'
 label: gpt
