@@ -51,6 +51,7 @@ EFI_UUID=$(blkid -s UUID -o value "${LOOP}p1")
 ROOT_UUID=$(blkid -s UUID -o value "${LOOP}p2")
 sed -i "s|${LOOP}p1|UUID=$EFI_UUID|g" "$MOUNT/etc/fstab"
 sed -i "s|${LOOP}p2|UUID=$ROOT_UUID|g" "$MOUNT/etc/fstab"
+sed -i '/[[:space:]]swap[[:space:]]/d' "$MOUNT/etc/fstab"
 
 cp zshrc "$MOUNT/root/.zshrc"
 mkdir -p "$MOUNT/etc/skel/.ssh"
