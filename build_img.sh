@@ -53,6 +53,12 @@ ln -s /etc/sv/agetty-ttyS0 /etc/runit/runsvdir/default/
 ln -s /etc/sv/dhcpcd /etc/runit/runsvdir/default/
 EOF
 
+mkdir -p "$MOUNT/boot/efi/EFI/BOOT"
+cat > "$MOUNT/boot/efi/EFI/BOOT/grub.cfg" << 'GRUBCFG'
+search --no-floppy --file --set=root /boot/grub/grub.cfg
+configfile /boot/grub/grub.cfg
+GRUBCFG
+
 rm -rf "$MOUNT/var/cache/xbps/"*
 
 # zerofill so freed blocks (e.g. deleted xbps package cache) don't compress poorly
