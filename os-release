@@ -1,8 +1,9 @@
-NAME="avoid"
+NAME="Avoid"
 ID="void"
-PRETTY_NAME="avoid"
+PRETTY_NAME="Avoid Linux (Based of Void Linux)"
 HOME_URL="https://github.com/sku0x20/avoid"
 DOCUMENTATION_URL="https://github.com/sku0x20/avoid"
-ANSI_COLOR="0;31"
+LOGO="void-logo"
+ANSI_COLOR="0;38;2;71;128;97"
 
 DISTRIB_ID="void"
