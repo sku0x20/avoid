@@ -45,6 +45,7 @@ xgenfstab -U "$MOUNT" > "$MOUNT/etc/fstab"
 cp zshrc "$MOUNT/root/.zshrc"
 mkdir -p "$MOUNT/etc/skel"
 cp zshrc "$MOUNT/etc/skel/.zshrc"
+echo "SHELL=/bin/zsh" >> "$MOUNT/etc/default/useradd"
 
 xchroot "$MOUNT" /bin/sh << 'EOF'
 set -e
