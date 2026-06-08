@@ -1,0 +1,7 @@
+NAME="avoid"
+ID="avoid"
+PRETTY_NAME="avoid"
+ANSI_COLOR="0;31"
+HOME_URL="https://voidlinux.org/"
+DOCUMENTATION_URL="https://docs.voidlinux.org/"
+BUG_REPORT_URL="https://github.com/void-linux/void-packages/issues"

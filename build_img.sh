@@ -51,13 +51,12 @@ chmod 600 "$MOUNT/etc/skel/.ssh/authorized_keys"
 echo "SHELL=/bin/zsh" >> "$MOUNT/etc/default/useradd"
 mkdir -p "$MOUNT/etc/ssh/sshd_config.d"
 cp sshd_hardening.conf "$MOUNT/etc/ssh/sshd_config.d/hardening.conf"
+cp os-release "$MOUNT/etc/os-release"
 
 xchroot "$MOUNT" /bin/sh << 'EOF'
 set -e
 echo "LANG=en_US.UTF-8" > /etc/locale.conf
 echo "avoid" > /etc/hostname
-sed -i 's/^NAME=.*/NAME="avoid"/' /etc/os-release
-sed -i 's/^PRETTY_NAME=.*/PRETTY_NAME="avoid"/' /etc/os-release
 usermod -p "$(openssl passwd -6 root)" -s /bin/zsh root
 ln -sf dash /bin/sh
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id="avoid" --no-nvram
