@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/void-linux/void-glibc-full:latest
-      options: --privileged
+      options: --privileged -v /dev:/dev
 
     steps:
       - uses: actions/checkout@v4
