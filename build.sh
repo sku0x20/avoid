@@ -60,5 +60,3 @@ umount -R "$MOUNT"
 e2fsck -f "${LOOP}p2"
 
 losetup -d "$LOOP"
-
-xz -T0 -v "$IMAGE"
