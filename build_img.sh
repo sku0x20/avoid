@@ -53,6 +53,9 @@ echo "SHELL=/bin/zsh" >> "$MOUNT/etc/default/useradd"
 xchroot "$MOUNT" /bin/sh << 'EOF'
 set -e
 echo "LANG=en_US.UTF-8" > /etc/locale.conf
+echo "avoid" > /etc/hostname
+mkdir -p /etc/ssh/sshd_config.d
+printf 'PasswordAuthentication no\nPermitRootLogin prohibit-password\n' > /etc/ssh/sshd_config.d/hardening.conf
 usermod -p "$(openssl passwd -6 root)" -s /bin/zsh root
 ln -sf dash /bin/sh
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id="Void" --no-nvram
