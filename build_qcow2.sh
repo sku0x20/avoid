@@ -3,6 +3,8 @@ set -e
 
 xbps-install -Sy qemu-img
 
+rm -f avoid.qcow2
+
 ./build_img.sh
 
 qemu-img convert -f raw -O qcow2 avoid.img avoid.qcow2

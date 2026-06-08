@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+rm -f avoid.img.gz
+
 ./build_img.sh
 
 LOOP=$(losetup -fP --show avoid.img)
