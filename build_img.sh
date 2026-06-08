@@ -53,6 +53,7 @@ mkdir -p "$MOUNT/etc/ssh/sshd_config.d"
 cp sshd_hardening.conf "$MOUNT/etc/ssh/sshd_config.d/hardening.conf"
 cp os-release "$MOUNT/etc/os-release"
 cp issue "$MOUNT/etc/issue"
+sed -i 's/Welcome to Void!/Welcome to Avoid!/' "$MOUNT/etc/runit/1"
 
 xchroot "$MOUNT" /bin/sh << 'EOF'
 set -e
