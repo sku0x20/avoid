@@ -7,7 +7,7 @@ A minimal Linux distribution based on Void Linux, aimed at servers, build machin
 Pre-built images are available on the [releases](https://github.com/sku0x20/avoid/releases) page:
 
 - `avoid.img.gz` — raw disk image, use with `dd` after unzipping; won't work with CDs. Should work with USBs and Ventoy.
-- `avoid.qcow2` — Cloud image
+- `avoid.qcow2` — QEMU/KVM image
 
 No ISO for now.
 
