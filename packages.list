@@ -8,6 +8,8 @@ runit-void
 
 # core tools
 bash
+dash
+zsh
 xbps
 coreutils
 util-linux

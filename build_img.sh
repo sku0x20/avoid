@@ -45,7 +45,8 @@ xgenfstab -U "$MOUNT" > "$MOUNT/etc/fstab"
 xchroot "$MOUNT" /bin/bash << 'EOF'
 set -e
 echo "LANG=en_US.UTF-8" > /etc/locale.conf
-usermod -p "$(openssl passwd -6 root)" root
+usermod -p "$(openssl passwd -6 root)" -s /bin/zsh root
+ln -sf dash /bin/sh
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id="Void" --no-nvram
 mkdir -p /boot/efi/EFI/BOOT
 cp /boot/efi/EFI/Void/grubx64.efi /boot/efi/EFI/BOOT/BOOTX64.EFI
