@@ -19,15 +19,3 @@ No ISO for now.
 ./build_qcow2.sh     # qcow2 image
 ```
 
-## Usage
-
-**Bare metal / VM (raw image)**
-```sh
-gunzip avoid.img.gz
-dd if=avoid.img of=/dev/sdX bs=4M status=progress
-```
-
-**QEMU**
-```sh
-qemu-system-x86_64 -enable-kvm -m 1G -drive file=avoid.qcow2,format=qcow2
-```
