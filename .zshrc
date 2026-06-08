@@ -3,7 +3,7 @@ HISTSIZE=1000
 SAVEHIST=1000
 setopt hist_ignore_dups append_history share_history
 
-PS1='%B%n@%m%b %~ %# '
+PS1='%B%n@%m%b %1~ %# '
 
 autoload -Uz compinit && compinit
 
