@@ -12,6 +12,7 @@ cleanup() {
 }
 trap cleanup EXIT
 
+rm -f "$IMAGE"
 truncate -s 8G "$IMAGE"
 
 sfdisk "$IMAGE" << 'EOF'
