@@ -42,6 +42,8 @@ XBPS_ARCH=$ARCH xbps-install -y -R "$REPO" -r "$MOUNT" $(grep -v '^\s*#' package
 
 xgenfstab -U "$MOUNT" > "$MOUNT/etc/fstab"
 
+cp .zshrc "$MOUNT/root/.zshrc"
+
 xchroot "$MOUNT" /bin/sh << 'EOF'
 set -e
 echo "LANG=en_US.UTF-8" > /etc/locale.conf
