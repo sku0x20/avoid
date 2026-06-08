@@ -56,6 +56,8 @@ xchroot "$MOUNT" /bin/sh << 'EOF'
 set -e
 echo "LANG=en_US.UTF-8" > /etc/locale.conf
 echo "avoid" > /etc/hostname
+sed -i 's/^NAME=.*/NAME="avoid"/' /etc/os-release
+sed -i 's/^PRETTY_NAME=.*/PRETTY_NAME="avoid"/' /etc/os-release
 usermod -p "$(openssl passwd -6 root)" -s /bin/zsh root
 ln -sf dash /bin/sh
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id="avoid" --no-nvram
