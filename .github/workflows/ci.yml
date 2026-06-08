@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/void-linux/void-glibc:latest
+      options: --privileged
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install build dependencies
+        run: |
+          xbps-install -Syu xbps
+          xbps-install -Sy xtools-minimal dosfstools e2fsprogs util-linux qemu-img openssl
+
+      - name: Build avoid.img.gz
+        run: ./build_img_gz.sh
+
+      - name: Build avoid.qcow2
+        run: ./build_qcow2.sh
