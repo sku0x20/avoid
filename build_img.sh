@@ -13,7 +13,7 @@ cleanup() {
 trap cleanup EXIT
 
 rm -f "$IMAGE"
-truncate -s 8G "$IMAGE"
+truncate -s 2G "$IMAGE"
 
 sfdisk "$IMAGE" << 'EOF'
 label: gpt
@@ -54,13 +54,11 @@ EOF
 
 rm -rf "$MOUNT/var/cache/xbps/"*
 
-# zerofill skipped — fresh build uses sparse files; unwritten blocks read as zeros,
-# so compressors see the same result without needing explicit zerofill.
-# only needed if free blocks contain stale data from deleted files.
-# dd if=/dev/zero of="$MOUNT/boot/efi/zeroes" bs=4M status=none || true
-# rm -f "$MOUNT/boot/efi/zeroes"
-# dd if=/dev/zero of="$MOUNT/zeroes" bs=4M status=none || true
-# rm -f "$MOUNT/zeroes"
+# zerofill so freed blocks (e.g. deleted xbps package cache) don't compress poorly
+dd if=/dev/zero of="$MOUNT/boot/efi/zeroes" bs=4M status=none || true
+rm -f "$MOUNT/boot/efi/zeroes"
+dd if=/dev/zero of="$MOUNT/zeroes" bs=4M status=none || true
+rm -f "$MOUNT/zeroes"
 
 sync
 umount -R "$MOUNT"
