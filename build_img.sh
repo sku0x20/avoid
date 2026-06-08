@@ -49,10 +49,13 @@ cp build.sh "$MOUNT/opt/extras/build.sh"
 
 rm -rf "$MOUNT/var/cache/xbps/"*
 
-dd if=/dev/zero of="$MOUNT/boot/efi/zeroes" bs=4M status=none || true
-rm -f "$MOUNT/boot/efi/zeroes"
-dd if=/dev/zero of="$MOUNT/zeroes" bs=4M status=none || true
-rm -f "$MOUNT/zeroes"
+# zerofill skipped — fresh build uses sparse files; unwritten blocks read as zeros,
+# so compressors see the same result without needing explicit zerofill.
+# only needed if free blocks contain stale data from deleted files.
+# dd if=/dev/zero of="$MOUNT/boot/efi/zeroes" bs=4M status=none || true
+# rm -f "$MOUNT/boot/efi/zeroes"
+# dd if=/dev/zero of="$MOUNT/zeroes" bs=4M status=none || true
+# rm -f "$MOUNT/zeroes"
 
 sync
 umount -R "$MOUNT"
