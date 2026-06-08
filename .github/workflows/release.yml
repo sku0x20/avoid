@@ -34,12 +34,13 @@ jobs:
       image: ghcr.io/void-linux/void-glibc-full:latest
       options: --privileged -v /dev:/dev
     steps:
+      - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
         with:
           name: avoid-img
           path: .
       - name: Compress
-        run: gzip -9 -v avoid.img
+        run: ./build_img_gz.sh
       - uses: actions/upload-artifact@v4
         with:
           name: avoid-img-gz
@@ -52,6 +53,7 @@ jobs:
       image: ghcr.io/void-linux/void-glibc-full:latest
       options: --privileged -v /dev:/dev
     steps:
+      - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
         with:
           name: avoid-img
@@ -61,16 +63,7 @@ jobs:
           xbps-install -Syu xbps
           xbps-install -Sy qemu-img e2fsprogs util-linux
       - name: Convert to qcow2
-        run: |
-          truncate -s 8G avoid.img
-          echo ", +" | sfdisk -N 2 avoid.img
-          LOOP=$(losetup -fP --show avoid.img)
-          trap "losetup -d $LOOP 2>/dev/null || true" EXIT
-          resize2fs "${LOOP}p2"
-          losetup -d "$LOOP"
-          trap - EXIT
-          qemu-img convert -f raw -O qcow2 avoid.img avoid.qcow2
-          rm avoid.img
+        run: ./build_qcow2.sh
       - uses: actions/upload-artifact@v4
         with:
           name: avoid-qcow2

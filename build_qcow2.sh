@@ -5,7 +5,7 @@ xbps-install -Sy qemu-img
 
 rm -f avoid.qcow2
 
-./build_img.sh
+[ -f avoid.img ] || ./build_img.sh
 
 # expand to 8G (sparse) so VM has room to grow
 truncate -s 8G avoid.img
