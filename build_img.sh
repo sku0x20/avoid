@@ -41,6 +41,9 @@ XBPS_ARCH=$ARCH xbps-install -y -S -R "$REPO" -r "$MOUNT"
 XBPS_ARCH=$ARCH xbps-install -y -R "$REPO" -r "$MOUNT" $(grep -v '^\s*#' packages.list | grep -v '^\s*$')
 
 xgenfstab -U "$MOUNT" > "$MOUNT/etc/fstab"
+# xgenfstab uses lsblk for UUID resolution which reads from sysfs, but sysfs
+# isn't populated by udev in containers — so it falls back to device paths.
+# blkid reads superblocks directly and works, so we fix up the paths after.
 EFI_UUID=$(blkid -s UUID -o value "${LOOP}p1")
 ROOT_UUID=$(blkid -s UUID -o value "${LOOP}p2")
 sed -i "s|${LOOP}p1|UUID=$EFI_UUID|g" "$MOUNT/etc/fstab"
