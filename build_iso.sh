@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
 
-./build_raw.sh
+./build_img.sh
 
 gzip -9 -v avoid.img
