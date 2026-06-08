@@ -40,8 +40,11 @@ cp /var/db/xbps/keys/* "$MOUNT/var/db/xbps/keys/"
 XBPS_ARCH=$ARCH xbps-install -y -S -R "$REPO" -r "$MOUNT"
 XBPS_ARCH=$ARCH xbps-install -y -R "$REPO" -r "$MOUNT" $(grep -v '^\s*#' packages.list | grep -v '^\s*$')
 
-blkid "${LOOP}p1" "${LOOP}p2"
 xgenfstab -U "$MOUNT" > "$MOUNT/etc/fstab"
+EFI_UUID=$(blkid -s UUID -o value "${LOOP}p1")
+ROOT_UUID=$(blkid -s UUID -o value "${LOOP}p2")
+sed -i "s|${LOOP}p1|UUID=$EFI_UUID|g" "$MOUNT/etc/fstab"
+sed -i "s|${LOOP}p2|UUID=$ROOT_UUID|g" "$MOUNT/etc/fstab"
 
 cp zshrc "$MOUNT/root/.zshrc"
 mkdir -p "$MOUNT/etc/skel/.ssh"
