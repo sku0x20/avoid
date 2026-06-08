@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-xbps-install -Syu qemu-img
+xbps-install -Sy qemu-img
 
 ./build_img.sh
 
