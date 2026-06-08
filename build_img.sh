@@ -54,6 +54,9 @@ cp sshd_hardening.conf "$MOUNT/etc/ssh/sshd_config.d/hardening.conf"
 cp os-release "$MOUNT/etc/os-release"
 cp issue "$MOUNT/etc/issue"
 sed -i 's/Welcome to Void!/Welcome to Avoid!/' "$MOUNT/etc/runit/1"
+sed -i 's/GRUB_DISTRIBUTOR="Void"/GRUB_DISTRIBUTOR="Avoid"/' "$MOUNT/etc/default/grub"
+sed -i 's/Void Linux with kernel/Avoid with kernel/g' "$MOUNT/etc/kernel.d/post-install/50-efibootmgr"
+sed -i 's/Void Linux with kernel/Avoid with kernel/g' "$MOUNT/etc/kernel.d/post-remove/50-efibootmgr"
 
 xchroot "$MOUNT" /bin/sh << 'EOF'
 set -e
