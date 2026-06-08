@@ -47,9 +47,10 @@ set -e
 echo "LANG=en_US.UTF-8" > /etc/locale.conf
 usermod -p "$(openssl passwd -6 root)" root
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id="Void" --removable
+xbps-reconfigure -fa
+grub-mkconfig -o /boot/grub/grub.cfg
 ln -s /etc/sv/agetty-ttyS0 /etc/runit/runsvdir/default/
 ln -s /etc/sv/dhcpcd /etc/runit/runsvdir/default/
-xbps-reconfigure -fa
 EOF
 
 rm -rf "$MOUNT/var/cache/xbps/"*
