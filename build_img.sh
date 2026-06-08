@@ -42,7 +42,7 @@ XBPS_ARCH=$ARCH xbps-install -y -R "$REPO" -r "$MOUNT" $(grep -v '^\s*#' package
 
 xgenfstab -U "$MOUNT" > "$MOUNT/etc/fstab"
 
-xchroot "$MOUNT" /bin/bash << 'EOF'
+xchroot "$MOUNT" /bin/sh << 'EOF'
 set -e
 echo "LANG=en_US.UTF-8" > /etc/locale.conf
 usermod -p "$(openssl passwd -6 root)" -s /bin/zsh root
