@@ -58,9 +58,9 @@ echo "LANG=en_US.UTF-8" > /etc/locale.conf
 echo "avoid" > /etc/hostname
 usermod -p "$(openssl passwd -6 root)" -s /bin/zsh root
 ln -sf dash /bin/sh
-grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id="Void" --no-nvram
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id="avoid" --no-nvram
 mkdir -p /boot/efi/EFI/BOOT
-cp /boot/efi/EFI/Void/grubx64.efi /boot/efi/EFI/BOOT/BOOTX64.EFI
+cp /boot/efi/EFI/avoid/grubx64.efi /boot/efi/EFI/BOOT/BOOTX64.EFI
 ln -s /etc/sv/agetty-ttyS0 /etc/runit/runsvdir/default/
 ln -s /etc/sv/dhcpcd /etc/runit/runsvdir/default/
 xbps-reconfigure -fa
