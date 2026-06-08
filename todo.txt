@@ -1,3 +1,6 @@
 custom kernel without
 - sound modules
 - wifi modules?
+
+iso image
+container image (OCI/Docker)

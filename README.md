@@ -19,8 +19,6 @@ No ISO for now.
 ./build_qcow2.sh     # qcow2 image
 ```
 
-Requires a Void Linux host.
-
 ## Usage
 
 **Bare metal / VM (raw image)**
