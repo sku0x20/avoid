@@ -7,7 +7,7 @@ PS1='%B%n@%m%b %1~ %# '
 
 autoload -Uz compinit && compinit
 
-setopt no_beep
+setopt NO_BEEP
 
 alias ls='ls --color=auto -hv'
 alias grep='grep --color=auto'
