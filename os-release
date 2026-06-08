@@ -1,7 +1,8 @@
 NAME="avoid"
 ID="avoid"
 PRETTY_NAME="avoid"
-ANSI_COLOR="0;31"
 HOME_URL="https://github.com/sku0x20/avoid"
 DOCUMENTATION_URL="https://github.com/sku0x20/avoid"
-BUG_REPORT_URL="https://github.com/sku0x20/avoid/issues"
+ANSI_COLOR="0;31"
+
+DISTRIB_ID="avoid"
