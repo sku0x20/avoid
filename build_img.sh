@@ -46,8 +46,7 @@ xchroot "$MOUNT" /bin/bash << 'EOF'
 set -e
 echo "LANG=en_US.UTF-8" > /etc/locale.conf
 xbps-reconfigure -fa
-pwconv
-echo "root:root" | chpasswd
+usermod -p "$(openssl passwd -6 root)" root
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id="Void" --removable
 ln -s /etc/sv/agetty-ttyS0 /etc/runit/runsvdir/default/
 ln -s /etc/sv/dhcpcd /etc/runit/runsvdir/default/
