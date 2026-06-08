@@ -52,6 +52,7 @@ echo "SHELL=/bin/zsh" >> "$MOUNT/etc/default/useradd"
 mkdir -p "$MOUNT/etc/ssh/sshd_config.d"
 cp sshd_hardening.conf "$MOUNT/etc/ssh/sshd_config.d/hardening.conf"
 cp os-release "$MOUNT/etc/os-release"
+cp issue "$MOUNT/etc/issue"
 
 xchroot "$MOUNT" /bin/sh << 'EOF'
 set -e
