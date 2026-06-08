@@ -35,7 +35,7 @@ jobs:
           name: avoid-img
           path: .
       - name: Compress
-        run: ./build_img_gz.sh
+        run: ./build_img_gz.sh avoid.img
 
   package-qcow2:
     needs: build
@@ -54,4 +54,4 @@ jobs:
           xbps-install -Syu xbps
           xbps-install -Sy qemu-img e2fsprogs util-linux
       - name: Convert to qcow2
-        run: ./build_qcow2.sh
+        run: ./build_qcow2.sh avoid.img
