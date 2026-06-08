@@ -51,9 +51,6 @@ ln -s /etc/sv/agetty-ttyS0 /etc/runit/runsvdir/default/
 ln -s /etc/sv/dhcpcd /etc/runit/runsvdir/default/
 EOF
 
-mkdir -p "$MOUNT/opt/extras"
-cp build.sh "$MOUNT/opt/extras/build.sh"
-
 rm -rf "$MOUNT/var/cache/xbps/"*
 
 # zerofill skipped — fresh build uses sparse files; unwritten blocks read as zeros,
