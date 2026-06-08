@@ -40,8 +40,6 @@ cp /var/db/xbps/keys/* "$MOUNT/var/db/xbps/keys/"
 XBPS_ARCH=$ARCH xbps-install -y -S -R "$REPO" -r "$MOUNT"
 XBPS_ARCH=$ARCH xbps-install -y -R "$REPO" -r "$MOUNT" $(grep -v '^\s*#' packages.list | grep -v '^\s*$')
 
-xgenfstab -U "$MOUNT" > "$MOUNT/etc/fstab"
-
 cp zshrc "$MOUNT/root/.zshrc"
 mkdir -p "$MOUNT/etc/skel/.ssh"
 cp zshrc "$MOUNT/etc/skel/.zshrc"
@@ -70,6 +68,7 @@ cp /boot/efi/EFI/avoid/grubx64.efi /boot/efi/EFI/BOOT/BOOTX64.EFI
 ln -s /etc/sv/agetty-ttyS0 /etc/runit/runsvdir/default/
 ln -s /etc/sv/dhcpcd /etc/runit/runsvdir/default/
 xbps-reconfigure -fa
+xgenfstab -U / > /etc/fstab
 EOF
 
 rm -rf "$MOUNT/var/cache/xbps/"*
