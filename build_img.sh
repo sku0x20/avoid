@@ -43,8 +43,10 @@ XBPS_ARCH=$ARCH xbps-install -y -R "$REPO" -r "$MOUNT" $(grep -v '^\s*#' package
 xgenfstab -U "$MOUNT" > "$MOUNT/etc/fstab"
 
 xchroot "$MOUNT" /bin/bash << 'EOF'
+set -e
 echo "LANG=en_US.UTF-8" > /etc/locale.conf
 xbps-reconfigure -fa
+pwconv
 echo "root:root" | chpasswd
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id="Void" --removable
 ln -s /etc/sv/agetty-ttyS0 /etc/runit/runsvdir/default/
