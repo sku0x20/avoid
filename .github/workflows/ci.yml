@@ -11,6 +11,9 @@ jobs:
       options: --privileged
 
     steps:
+      - name: Install libstdc++ for Actions runner
+        run: xbps-install -Sy gcc-libs
+
       - uses: actions/checkout@v4
 
       - name: Install build dependencies
