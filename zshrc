@@ -2,6 +2,7 @@ HISTFILE=~/.zsh_history
 HISTSIZE=1000
 SAVEHIST=1000
 setopt hist_ignore_dups append_history share_history
+setopt HIST_IGNORE_ALL_DUPS HIST_SAVE_NO_DUPS HIST_IGNORE_SPACE
 
 PS1='%B%n@%m%b %1~ %# '
 
