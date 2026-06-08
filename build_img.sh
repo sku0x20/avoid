@@ -44,8 +44,9 @@ xgenfstab -U "$MOUNT" > "$MOUNT/etc/fstab"
 # xgenfstab uses lsblk for UUID resolution which reads from sysfs, but sysfs
 # isn't populated by udev in containers — so it falls back to device paths.
 # blkid reads superblocks directly and works, so we fix up the paths after.
-# Alternative: mount /run/udev from host, but that has a timing issue —
-# udevd may not have processed loop device events yet (needs udevadm settle).
+# Alternative: mount /run/udev from host (-v /run/udev:/run/udev:ro), but
+# that has a timing issue — udevd may not have processed loop device events
+# yet (needs udevadm settle).
 EFI_UUID=$(blkid -s UUID -o value "${LOOP}p1")
 ROOT_UUID=$(blkid -s UUID -o value "${LOOP}p2")
 sed -i "s|${LOOP}p1|UUID=$EFI_UUID|g" "$MOUNT/etc/fstab"
