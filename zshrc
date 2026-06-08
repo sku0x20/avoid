@@ -9,6 +9,13 @@ autoload -Uz compinit && compinit
 
 setopt no_beep
 
-alias ls='ls --color=auto'
-alias ll='ls -lh'
-alias la='ls -lha'
+alias ls='ls --color=auto -hv'
+alias grep='grep --color=auto'
+alias diff='diff --color=auto'
+alias ip='ip -c=auto'
+
+alias l='ls'
+alias ll='ls -l'
+alias la='ls -lA'
+
+alias mv='mv -i'
