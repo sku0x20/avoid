@@ -11,11 +11,5 @@ Pre-built images are available on the [releases](https://github.com/sku0x20/avoi
 
 No ISO for now.
 
-## Build
-
-```sh
-./build_img.sh       # raw image
-./build_img_gz.sh    # gzipped raw image
-./build_qcow2.sh     # qcow2 image
-```
+See `build_*` for build scripts and `packages.list` for included packages.
 
