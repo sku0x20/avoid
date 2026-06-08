@@ -21,7 +21,7 @@ jobs:
       - name: Install build dependencies
         run: |
           xbps-install -Syu xbps
-          xbps-install -Sy xtools dosfstools e2fsprogs util-linux qemu-img openssl
+          xbps-install -Sy xtools-minimal dosfstools e2fsprogs util-linux qemu-img openssl
 
       - name: Build avoid.img.gz
         run: ./build_img_gz.sh
