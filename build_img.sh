@@ -83,6 +83,6 @@ rm -f "$MOUNT/zeroes"
 sync
 umount -R "$MOUNT"
 
-e2fsck -f "${LOOP}p2"
+e2fsck -fp "${LOOP}p2"
 
 losetup -d "$LOOP"
