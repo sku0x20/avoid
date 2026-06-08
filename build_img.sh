@@ -43,8 +43,11 @@ XBPS_ARCH=$ARCH xbps-install -y -R "$REPO" -r "$MOUNT" $(grep -v '^\s*#' package
 xgenfstab -U "$MOUNT" > "$MOUNT/etc/fstab"
 
 cp zshrc "$MOUNT/root/.zshrc"
-mkdir -p "$MOUNT/etc/skel"
+mkdir -p "$MOUNT/etc/skel/.ssh"
 cp zshrc "$MOUNT/etc/skel/.zshrc"
+touch "$MOUNT/etc/skel/.ssh/authorized_keys"
+chmod 700 "$MOUNT/etc/skel/.ssh"
+chmod 600 "$MOUNT/etc/skel/.ssh/authorized_keys"
 echo "SHELL=/bin/zsh" >> "$MOUNT/etc/default/useradd"
 
 xchroot "$MOUNT" /bin/sh << 'EOF'
