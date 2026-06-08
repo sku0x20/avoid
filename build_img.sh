@@ -43,6 +43,8 @@ XBPS_ARCH=$ARCH xbps-install -y -R "$REPO" -r "$MOUNT" $(grep -v '^\s*#' package
 xgenfstab -U "$MOUNT" > "$MOUNT/etc/fstab"
 
 cp zshrc "$MOUNT/root/.zshrc"
+mkdir -p "$MOUNT/etc/skel"
+cp zshrc "$MOUNT/etc/skel/.zshrc"
 
 xchroot "$MOUNT" /bin/sh << 'EOF'
 set -e
