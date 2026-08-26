@@ -34,6 +34,9 @@ mount "${LOOP}p1" "$MOUNT/boot/efi"
 mkdir -p "$MOUNT/etc/xbps.d"
 cp noextract.conf "$MOUNT/etc/xbps.d/noextract.conf"
 
+mkdir -p "$MOUNT/etc/dracut.conf.d"
+cp dracut.conf.d/10-generic.conf "$MOUNT/etc/dracut.conf.d/10-generic.conf"
+
 mkdir -p "$MOUNT/var/db/xbps/keys"
 cp /var/db/xbps/keys/* "$MOUNT/var/db/xbps/keys/"
 
