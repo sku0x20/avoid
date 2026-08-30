@@ -21,11 +21,12 @@ jobs:
           xbps-install -Syu xbps
           xbps-install -Sy xtools-minimal dosfstools e2fsprogs util-linux openssl
       - name: Build
+        working-directory: server
         run: ./build_img.sh
       - uses: actions/upload-artifact@v4
         with:
           name: avoid-img
-          path: avoid.img
+          path: server/avoid.img
 
   package-gz:
     needs: build
@@ -38,13 +39,14 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: avoid-img
-          path: .
+          path: server
       - name: Compress
+        working-directory: server
         run: ./build_img_gz.sh avoid.img
       - uses: actions/upload-artifact@v4
         with:
           name: avoid-img-gz
-          path: avoid.img.gz
+          path: server/avoid.img.gz
 
   package-qcow2:
     needs: build
@@ -57,17 +59,18 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: avoid-img
-          path: .
+          path: server
       - name: Install dependencies
         run: |
           xbps-install -Syu xbps
           xbps-install -Sy qemu-img e2fsprogs util-linux
       - name: Convert to qcow2
+        working-directory: server
         run: ./build_qcow2.sh avoid.img
       - uses: actions/upload-artifact@v4
         with:
           name: avoid-qcow2
-          path: avoid.qcow2
+          path: server/avoid.qcow2
 
   release:
     needs: [package-gz, package-qcow2]
