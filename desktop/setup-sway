@@ -1,0 +1,66 @@
+#!/bin/zsh
+# Sets up a Sway/Wayland desktop session on top of the avoid server image.
+# Run as root: ./setup-sway <username>
+
+set -e
+
+USERNAME="${1:?Usage: setup-sway <username>}"
+
+if [ "$(id -u)" -ne 0 ]; then
+    echo "Run as root (or with sudo)." >&2
+    exit 1
+fi
+
+# Core Wayland libraries
+xbps-install -Sy wayland wayland-protocols
+
+# Seat management (no systemd-logind on runit)
+xbps-install -Sy seatd
+ln -sf /etc/sv/seatd /var/service/
+
+# System D-Bus
+xbps-install -Sy dbus
+ln -sf /etc/sv/dbus /var/service/
+
+# Session/seat manager for XDG_RUNTIME_DIR + per-user D-Bus
+xbps-install -Sy turnstile
+ln -sf /etc/sv/turnstiled /var/service/
+
+# GPU driver (llvmpipe software fallback covers VMs with no accel)
+xbps-install -Sy mesa-dri
+
+# Compositor + terminal + launcher + cursor theme
+xbps-install -Sy sway foot wmenu xcursor-themes
+
+# Desktop user
+if ! id "$USERNAME" >/dev/null 2>&1; then
+    useradd -m -G wheel,_seatd -s /bin/zsh "$USERNAME"
+    echo "Set a password for $USERNAME:"
+    passwd "$USERNAME"
+else
+    usermod -aG wheel,_seatd "$USERNAME"
+fi
+
+# Enable sudo for wheel group
+if ! grep -q '^%wheel ALL=(ALL) ALL' /etc/sudoers; then
+    sed -i 's/^# *%wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/' /etc/sudoers
+    visudo -c
+fi
+
+USER_HOME=$(eval echo "~$USERNAME")
+
+# Sway config
+sudo -u "$USERNAME" mkdir -p "$USER_HOME/.config/sway"
+[ -f "$USER_HOME/.config/sway/config" ] || sudo -u "$USERNAME" cp /etc/sway/config "$USER_HOME/.config/sway/config"
+
+# Per-user D-Bus session via turnstile
+sudo -u "$USERNAME" mkdir -p "$USER_HOME/.config/service/dbus"
+sudo -u "$USERNAME" ln -sf /usr/share/examples/turnstile/dbus.run "$USER_HOME/.config/service/dbus/run"
+sudo -u "$USERNAME" ln -sf /usr/share/examples/turnstile/dbus.check "$USER_HOME/.config/service/dbus/check"
+
+# Virtual GPUs (QEMU/virtio-gpu etc.) can't do hardware cursor planes
+if ! grep -q 'WLR_NO_HARDWARE_CURSORS' "$USER_HOME/.zshrc" 2>/dev/null; then
+    echo 'export WLR_NO_HARDWARE_CURSORS=1' | sudo -u "$USERNAME" tee -a "$USER_HOME/.zshrc" >/dev/null
+fi
+
+echo "Done. Log out, log back in as $USERNAME, then run: sway"
