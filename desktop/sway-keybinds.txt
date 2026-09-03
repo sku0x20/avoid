@@ -1,0 +1,26 @@
+Sway keybindings notes
+=======================
+$mod = Super/Windows key (sway default)
+
+App launcher
+  $mod+d                        open launcher (wmenu)
+
+Floating / overlapping windows
+  $mod+Shift+Space               toggle floating <-> tiled for focused window
+  $mod + left-click drag         move a floating window
+  $mod + right-click drag        resize a floating window
+
+Focus / switching between windows
+  $mod + Left/Down/Up/Right      move focus in direction (also h/j/k/l)
+  click on window                focus it (raises floating windows on top)
+
+Fullscreen
+  $mod+f                         toggle fullscreen for focused window (press again to exit)
+
+Custom binds (not in sway default config, add manually if wanted)
+  $mod+Tab                       -> bindsym $mod+Tab focus next
+  $mod+F1 (floating only)        -> bindsym $mod+F1 [floating] focus next
+
+Config snippets referenced
+  for_window [app_id="pavucontrol"] floating enable
+    - makes a specific app always start floating (use class="..." for X11/XWayland apps)
