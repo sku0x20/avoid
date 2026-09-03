@@ -24,3 +24,8 @@ Custom binds (not in sway default config, add manually if wanted)
 Config snippets referenced
   for_window [app_id="pavucontrol"] floating enable
     - makes a specific app always start floating (use class="..." for X11/XWayland apps)
+
+  for_window [shell="xdg_shell"] floating enable
+  for_window [shell="xwayland"] floating enable
+    - makes ALL windows float by default (full overlapping/stacking mode instead of tiling)
+    - reload config after editing: $mod+Shift+c
